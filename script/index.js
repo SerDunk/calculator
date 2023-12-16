@@ -66,13 +66,11 @@ function operand(){
                 currentNumber=currentNumber+number.textContent
                 display.textContent=currentNumber
                 firstNumber=parseInt(currentNumber)
-                console.log(firstNumber)
             }
             else if(currentOperator==''){
                 currentNumber=currentNumber+number.textContent
                 display.textContent=currentNumber
                 secondNumber=parseInt(currentNumber)
-                console.log(secondNumber)
             }
         })
     })
@@ -86,7 +84,16 @@ function getOperator(){
                 operator=currentOperator
                 cleanDisplay()
             }
-
+            else if(firstNumber!=0){
+                let result=operation(firstNumber,operator,secondNumber)
+                firstNumber=result
+                cleanDisplay()
+                operator=null
+                currentOperator=op.textContent
+                operator=currentOperator
+                display.textContent=firstNumber
+                currentOperator=''
+            }
             else{
                 operator=op.textContent
                 firstNumber=parseInt(display.textContent)
@@ -106,7 +113,11 @@ function equalButton(){
     equal.addEventListener('click',()=>{
         let result=operation(firstNumber,operator,secondNumber)
         display.textContent=result
-        console.log(result)
+        firstNumber=0
+        secondNumber=0
+        currentNumber=''
+        operator=''
+        currentOperator=''
     })
 }
 
